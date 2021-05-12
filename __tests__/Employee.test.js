@@ -1,4 +1,3 @@
-const { test, expect } = require('@jest/globals');
 const Employee = require('../lib/Employee');
 
 console.log(Employee);
@@ -34,5 +33,3 @@ test('gets role of employee', () => {
 
     expect(employee.getRole()).toEqual("Employee");
 });
-
-module.exports = Employee;
