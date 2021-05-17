@@ -1,3 +1,5 @@
+const generateHTML = require('./src/generateHTML');
+
 const inquirer = require('inquirer');
 const fs = require('fs');
 
@@ -186,4 +188,25 @@ const addEmployee = () => {
     })
 };
 
+const writeFile = data => {
+    fs.writeFile('./dist/index.html', data, err => {
+        if (err) {
+            console.log(err);
+            return;
+        } else {
+            console.log("Your team profile has been created! Check out the index.html")
+        }
+    })
+};
+
 addManager()
+    .then(addEmployee)
+    .then(teamArray => {
+        return generateHTML(teamArray);
+    })
+    .then(pageHTML => {
+        return writeFile(pageHTML);
+    })
+    .catch(err => {
+        console.log(err);
+    });
